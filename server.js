@@ -85,12 +85,15 @@ app.get("/chat", async (req,res) => {
   // console.log(allTexts);
   res.render("chat", { allTexts });
 })
-
+app.get("/chats", async (req,res) => {
+  let allTexts = await Chat.find({});
+  // console.log(allTexts);
+  res.send({ allTexts });
+})
 app.post("/chat", async (req,res) => {
   let newText = req.body.text;
   const newChat = new Chat({ username: 'NA', text: newText });
   await newChat.save()
-    .then(p => console.log(p))
     .catch(e => console.log(e))
 
   res.redirect("/chat");

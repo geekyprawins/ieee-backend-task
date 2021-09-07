@@ -5,19 +5,37 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Chat</title>
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"></script>
   </head>
   <body>
     <h1>Chat</h1>
-
-    <% for(let text of allTexts) { %>
-      <li><%= text.text %> </li>
-    <% } %>
+    <div id="chatbox">
+      <% for(let text of allTexts) { %>
+        <%= text.text %> <br>
+      <% } %>
+    </div>
+    
     <form action="/chat" method="post">
 
       <label for="chat">Text here: </label>
       <input type="text" name="text" id="text" />
       <button type="submit">Send</button>
     </form>
-
+    
+    <script>
+    setInterval(function getChapterLinks() {
+      $.ajax({
+        url: "/chats",
+      }).done(function(data) {
+        document.getElementById("chatbox").innerHTML="";
+        for(let text of data.allTexts) {
+          document.getElementById("chatbox").insertAdjacentHTML("beforeend", text.text+ "<br>");
+        }
+      });
+    }, 1000);
+    </script>
   </body>
 </html>
