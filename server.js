@@ -9,6 +9,9 @@ const bodyParser = require("body-parser");
 const LocalStrategy = require("passport-local");
 const passportLocalMongoose = require("passport-local-mongoose");
 const User = require("./models/user");
+const Chats = require("./models/chats");
+
+
 mongoose.connect(process.env.DB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -74,6 +77,21 @@ app.get("/signout", (req, res) => {
   req.logout();
   res.redirect("/");
 });
+
+
+app.get("/chat", (req,res) => {
+  res.render("chat");
+})
+app.post("/chat", (req,res) => {
+  let newText = req.body.text;
+
+  const newChat = new Chats({ username: 'NA', text: newText });
+  newChat.save(function (err) {
+  if (err) return handleError(err);
+  });
+
+  res.redirect("/chat");
+})
 
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) {
