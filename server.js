@@ -9,9 +9,7 @@ const bodyParser = require("body-parser");
 const LocalStrategy = require("passport-local");
 const passportLocalMongoose = require("passport-local-mongoose");
 const User = require("./models/user");
-const Chats = require("./models/chats");
-
-
+const Chat = require("./models/chats");
 mongoose.connect(process.env.DB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -37,7 +35,11 @@ app.get("/", (req, res) => {
 });
 
 app.get("/final", (req, res) => {
-  res.render("final");
+  if(req.isAuthenticated()){
+    res.render("final");
+
+  }
+  else res.send("You are not logged in");
 });
 // auth routes
 app.get("/signin", (req, res) => {
@@ -78,17 +80,18 @@ app.get("/signout", (req, res) => {
   res.redirect("/");
 });
 
-
-app.get("/chat", (req,res) => {
-  res.render("chat");
+app.get("/chat", async (req,res) => {
+  let allTexts = await Chat.find({});
+  // console.log(allTexts);
+  res.render("chat", { allTexts });
 })
-app.post("/chat", (req,res) => {
-  let newText = req.body.text;
 
-  const newChat = new Chats({ username: 'NA', text: newText });
-  newChat.save(function (err) {
-  if (err) return handleError(err);
-  });
+app.post("/chat", async (req,res) => {
+  let newText = req.body.text;
+  const newChat = new Chat({ username: 'NA', text: newText });
+  await newChat.save()
+    .then(p => console.log(p))
+    .catch(e => console.log(e))
 
   res.redirect("/chat");
 })
@@ -102,3 +105,6 @@ function isLoggedIn(req, res, next) {
 app.listen(port, () => {
   console.log(`Listening began at ${port} 🦻`);
 });
+
+
+

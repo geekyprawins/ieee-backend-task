@@ -9,6 +9,9 @@
   <body>
     <h1>Chat</h1>
 
+    <% for(let text of allTexts) { %>
+      <li><%= text.text %> </li>
+    <% } %>
     <form action="/chat" method="post">
 
       <label for="chat">Text here: </label>
