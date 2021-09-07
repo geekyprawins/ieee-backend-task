@@ -34,7 +34,11 @@ app.get("/", (req, res) => {
 });
 
 app.get("/final", (req, res) => {
-  res.render("final");
+  if(req.isAuthenticated()){
+    res.render("final");
+
+  }
+  else res.send("You are not logged in");
 });
 // auth routes
 app.get("/signin", (req, res) => {
@@ -84,3 +88,6 @@ function isLoggedIn(req, res, next) {
 app.listen(port, () => {
   console.log(`Listening began at ${port} 🦻`);
 });
+
+
+
