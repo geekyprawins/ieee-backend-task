@@ -9,6 +9,7 @@ const bodyParser = require("body-parser");
 const LocalStrategy = require("passport-local");
 const passportLocalMongoose = require("passport-local-mongoose");
 const User = require("./models/user");
+const Chat = require("./models/chats");
 mongoose.connect(process.env.DB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -78,6 +79,25 @@ app.get("/signout", (req, res) => {
   req.logout();
   res.redirect("/");
 });
+
+app.get("/chat", async (req,res) => {
+  let allTexts = await Chat.find({});
+  // console.log(allTexts);
+  res.render("chat", { allTexts });
+})
+app.get("/chats", async (req,res) => {
+  let allTexts = await Chat.find({});
+  // console.log(allTexts);
+  res.send({ allTexts });
+})
+app.post("/chat", async (req,res) => {
+  let newText = req.body.text;
+  const newChat = new Chat({ username: 'NA', text: newText });
+  await newChat.save()
+    .catch(e => console.log(e))
+
+  res.redirect("/chat");
+})
 
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) {
