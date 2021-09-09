@@ -13,7 +13,9 @@
   <body>
     <h1>Chat</h1>
     <div id="chatbox">
-      
+      <% for(let text of allTexts) { %>
+        <%= text.text %> <br>
+      <% } %>
     </div>
     
     <form action="/chat" method="post">
