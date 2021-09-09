@@ -1,0 +1,47 @@
+[33mcommit fa732d9f3482fa08ef90e7b6053d95f20df7932f[m[33m ([m[1;36mHEAD -> [m[1;32mabhijeet[m[33m, [m[1;31morigin/abhijeet[m[33m)[m
+Author: abhijeetananddeo <abhijeetananddeo@gmail.com>
+Date:   Tue Sep 7 11:12:29 2021 +0530
+
+    updated the html a bit
+
+[33mcommit accbed015b950810d100d9e1094b5bc15352ebda[m
+Author: abhijeetananddeo <abhijeetananddeo@gmail.com>
+Date:   Tue Sep 7 10:55:02 2021 +0530
+
+    Implemented ajax
+
+[33mcommit 8370891be896236757e915dc4a9b8fe6037eee68[m
+Author: abhijeetananddeo <abhijeetananddeo@gmail.com>
+Date:   Tue Sep 7 07:48:08 2021 +0530
+
+    added Chat
+
+[33mcommit 8020f3bad83e4027dcfd2b74d4b448a7b6ea40af[m
+Author: abhijeetananddeo <abhijeetananddeo@gmail.com>
+Date:   Tue Sep 7 13:30:14 2021 +0530
+
+    Created chat routes and schema
+
+[33mcommit 1e1a5d51a73cda38a8e71f8ff84f176811b2f2ea[m
+Author: Praveen Varma <swamiraju.varma@learner.manipal.edu>
+Date:   Mon Sep 6 17:51:25 2021 +0530
+
+    gitignore
+
+[33mcommit 1a78b99389019fdd759381e4349bf87b1b8a7406[m
+Author: Praveen Varma <swamiraju.varma@learner.manipal.edu>
+Date:   Mon Sep 6 17:45:40 2021 +0530
+
+    user login/register
+
+[33mcommit f15f5570e00dd4fbd257439182be99328010ec56[m
+Author: Praveen Varma <swamiraju.varma@learner.manipal.edu>
+Date:   Mon Sep 6 15:24:07 2021 +0530
+
+    packages
+
+[33mcommit 63302bd786ed44caef344dad5c57e5b132166153[m
+Author: Praveen Varma <swamiraju.varma@learner.manipal.edu>
+Date:   Sat Sep 4 18:15:52 2021 +0530
+
+    initial
