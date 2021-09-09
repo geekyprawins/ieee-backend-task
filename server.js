@@ -11,10 +11,12 @@ const passportLocalMongoose = require("passport-local-mongoose");
 const User = require("./models/user");
 const Chat = require("./models/chats");
 // var userObj = {};
-mongoose.connect(process.env.DB_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-}).then(console.log("Connected to database"));
+mongoose
+  .connect(process.env.DB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(console.log("Connected to database"));
 app.use(
   require("express-session")({
     secret: "Any normal Word", //decode or encode session
@@ -28,8 +30,9 @@ passport.use(new LocalStrategy(User.authenticate()));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use("/static", express.static("public"));
+app.use("/particles", express.static("particles.js-master"));
 
-app.use('/static', express.static('public'))
 // R O U T E S
 app.get("/", (req, res) => {
   //   res.sendFile(__dirname + "/public/index.html");
@@ -38,12 +41,10 @@ app.get("/", (req, res) => {
 });
 
 app.get("/final", (req, res) => {
-  if(req.isAuthenticated()){
+  if (req.isAuthenticated()) {
     // userObj = {user: req.user.username, id: req.user._id};
-    res.render("final", {user: req.user});
-
-  }
-  else res.send("You are not logged in");
+    res.render("final", { user: req.user });
+  } else res.send("You are not logged in");
 });
 // auth routes
 
@@ -85,23 +86,22 @@ app.get("/signout", (req, res) => {
   res.redirect("/");
 });
 //Getting all texts
-app.get("/chat", async (req,res) => {
+app.get("/chat", async (req, res) => {
   let allTexts = await Chat.find({});
   // console.log(allTexts);
   res.render("chat", { allTexts });
-})
+});
 //Getting data for displaying through ajax
-app.get("/chats", async (req,res) => {
+app.get("/chats", async (req, res) => {
   let allTexts = await Chat.find({});
   res.send({ allTexts });
-})
+});
 //saving text to db
-app.post("/chat", async (req,res) => {
+app.post("/chat", async (req, res) => {
   let newText = req.body.text;
   let user = req.body.first;
   const newChat = new Chat({ username: user, text: newText });
-  await newChat.save()
-    .catch(e => console.log(e))
+  await newChat.save().catch((e) => console.log(e));
 
   res.redirect("/chat");
 });
@@ -115,6 +115,3 @@ function isLoggedIn(req, res, next) {
 app.listen(port, () => {
   console.log(`Listening began at ${port} 🦻`);
 });
-
-
-

@@ -5,23 +5,37 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sign In Success</title>
+    <link rel="stylesheet" href="/static/style.css" />
   </head>
   <body>
-    <h1>Success, you're in!</h1>
-    <!-- <p>Welcome, <%= user.username %></p> -->
-    <div id='user'>
-       
+    <div id="particles-js">
+      <div class="heading">
+        <h1>Success, you're in!</h1>
+        <h3>Welcome, <%= user.username %></h3>
+      </div>
+      <div id="user"></div>
+      <a href="./chat" class="link"> Open Chat Room </a>
+      <ul>
+        <li class="li"><a href="/" class="link">Home</a></li>
+        <li class="li"><a href="/signout" class="link">Sign out</a></li>
+      </ul>
     </div>
+
+    <!-- <h1>Success, you're in!</h1>
+    <p>Welcome, <%= user.username %></p>
+    <div id="user"></div>
     <a href="./chat"> Open Chat Room </a>
     <ul>
       <li><a href="/">Home</a></li>
       <li><a href="/signout">Sign out</a></li>
-    </ul>
-    
-<!-- <script src="/static/main.js"></script> -->
-<script>
-    const user = localStorage.getItem('name');
-    console.log(user);
-</script>
-</body>
+    </ul> -->
+
+    <!-- <script src="/static/main.js"></script> -->
+    <script>
+      const user = localStorage.getItem("name");
+      console.log(user);
+    </script>
+    <script src="/particles/particles.js"></script>
+    <script src="/particles/demo/js/app.js"></script>
+  </body>
 </html>

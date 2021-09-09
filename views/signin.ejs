@@ -5,9 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Chat room-SignIn</title>
+    <link rel="stylesheet" href="/static/style.css" />
   </head>
   <body>
-    <h1>Sign In Page</h1>
+    <h1 id ="heading">Sign In Page</h1>
 
     <form action="/signin" method="post">
       <label for="username">Username: </label>
@@ -18,10 +19,12 @@
       <input type="password" name="password" id="password" />
       <button id="submit" type="submit">Sign In</button>
     </form>
-    <ul>
-      <li><a href="/">Home</a></li>
-      <li><a href="/signup">Sign Up</a></li>
+    <ul class="signin">
+      <li ><a href="/">Home</a></li>
+      <li ><a href="/signup">Sign Up</a></li>
     </ul>
     <script src="/static/main.js"></script>
   </body>
 </html>
+
+
