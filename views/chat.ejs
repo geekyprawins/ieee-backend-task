@@ -13,27 +13,36 @@
   <body>
     <h1>Chat</h1>
     <div id="chatbox">
-      
+      <% for(let text of allTexts) { %>
+        <%= text.username+ " : " +text.text %> <br>
+      <% } %>
     </div>
     
     <form action="/chat" method="post">
 
       <label for="chat">Text here: </label>
       <input type="text" name="text" id="text" />
+      <input type="hidden" type="text" id="User" name="first" value="" size ="40" />
       <button type="submit">Send</button>
     </form>
     
     <script>
+    const user = localStorage.getItem('name');
+    document.getElementById('User').value = user;
     setInterval(function getChapterLinks() {
       $.ajax({
         url: "/chats",
       }).done(function(data) {
         document.getElementById("chatbox").innerHTML="";
         for(let text of data.allTexts) {
-          document.getElementById("chatbox").insertAdjacentHTML("beforeend", text.text+ "<br>");
+          document.getElementById("chatbox").insertAdjacentHTML("beforeend",text.username+ " : " +text.text+ "<br>");
         }
       });
     }, 1000);
+    
+      
+    
+   
     </script>
   </body>
 </html>

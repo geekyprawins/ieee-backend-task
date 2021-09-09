@@ -1,12 +1,9 @@
-console.log('Inside main.js');
-var username = document.getElementById('username').nodeValue;
-sessionStorage.setItem('currentUser', username);
 
-var getUserName = sessionStorage.getItem('currentUser');
-var usernameText = document.createElement('p');
-usernameText.innerText = getUserName;
-var div = document.getElementById('user');
-div.appendChild(usernameText);
+document.getElementById("submit").addEventListener("click", catchUser);
 
-
-
+async function catchUser (){
+   nameUser = document.getElementById("username").value;
+   //console.log (nameUser);
+   //alert(nameUser);
+   localStorage.setItem('name', nameUser);
+}

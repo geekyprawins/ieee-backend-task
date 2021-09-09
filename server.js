@@ -14,7 +14,7 @@ const Chat = require("./models/chats");
 mongoose.connect(process.env.DB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-});
+}).then(console.log("Connected to database"));
 app.use(
   require("express-session")({
     secret: "Any normal Word", //decode or encode session
@@ -28,6 +28,8 @@ passport.use(new LocalStrategy(User.authenticate()));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.use('/static', express.static('public'))
 // R O U T E S
 app.get("/", (req, res) => {
   //   res.sendFile(__dirname + "/public/index.html");
@@ -82,20 +84,22 @@ app.get("/signout", (req, res) => {
   req.logout();
   res.redirect("/");
 });
-
+//Getting all texts
 app.get("/chat", async (req,res) => {
   let allTexts = await Chat.find({});
   // console.log(allTexts);
   res.render("chat", { allTexts });
-});
+})
+//Getting data for displaying through ajax
 app.get("/chats", async (req,res) => {
   let allTexts = await Chat.find({});
-  // console.log(allTexts);
   res.send({ allTexts });
-});
+})
+//saving text to db
 app.post("/chat", async (req,res) => {
   let newText = req.body.text;
-  const newChat = new Chat({ username: 'NA', text: newText });
+  let user = req.body.first;
+  const newChat = new Chat({ username: user, text: newText });
   await newChat.save()
     .catch(e => console.log(e))
 
