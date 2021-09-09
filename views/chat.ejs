@@ -28,9 +28,13 @@
     </form>
     
     <script>
+      window.scrollTo(0,document.body.scrollHeight);
+    //Saves to localStorage
     const user = localStorage.getItem('name');
+
+    //Get texts using ajax every 1 second
     document.getElementById('User').value = user;
-    setInterval(function getChapterLinks() {
+    setInterval(function getTexts() {
       $.ajax({
         url: "/chats",
       }).done(function(data) {
